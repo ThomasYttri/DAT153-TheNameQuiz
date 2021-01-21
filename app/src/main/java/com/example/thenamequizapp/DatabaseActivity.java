@@ -50,9 +50,23 @@ public class DatabaseActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
+
+    public boolean addPerson(String name, Integer image) {
+        if (name != null && image != null) {
+            int i = names.length +1;
+            names[i] = name;
+            images[i] = image;
+            System.out.println(name.toString() + " with picture " + image.toString() + " has been added to the database.");
+            return true;
+        } else {
+            System.out.println("Name or image is not valid");
+            System.out.println("Name: " + name.toString());
+            System.out.println("Image: " + image.toString());
+            return false;
+        }
+    }
+
 
     class MyAdapter extends ArrayAdapter<String> {
 
@@ -82,21 +96,5 @@ public class DatabaseActivity extends AppCompatActivity {
             return row;
         }
     }
-
-//    HashMap database = new HashMap();
-//    addPerson("Jon", "jon");
-    /*
-    private void addPerson(String name, String img){
-        int key = 1;
-
-        if(name != null) {
-            database.put(key, name);
-            key++;
-        } else {
-            System.out.println("Invalid name");
-        }
-    }
-
-     */
 
 }
