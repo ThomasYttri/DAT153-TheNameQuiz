@@ -2,6 +2,7 @@ package com.example.thenamequizapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,41 +29,42 @@ public class DatabaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
+        Bundle extras = getIntent().getExtras();
+        checkForNewPerson(extras);
 
         listView = findViewById(R.id.dbList);
 
         // Create adapter and fill with hardcoded data
         MyAdapter myAdapter = new MyAdapter(this, names, images);
         listView.setAdapter(myAdapter);
-        // Setting item click on list view
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if (position == 0) {
-                    Toast.makeText(DatabaseActivity.this, "You clicked on Jon", Toast.LENGTH_SHORT).show();
-                }
-                if (position == 1) {
-                    Toast.makeText(DatabaseActivity.this, "You clicked on Morten", Toast.LENGTH_SHORT).show();
-                }
-                if (position == 2) {
-                    Toast.makeText(DatabaseActivity.this, "You clicked on Bendik", Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        });
     }
 
-    public boolean addPerson(String name, Integer image) {
+    // Checks for new person in extras and calls addPerson if present
+    public void checkForNewPerson(Bundle bundle) {
+        Bundle extras = getIntent().getExtras();
+
+        if (extras == null) {
+            return;
+        } else {
+            String name = extras.getString("name");
+            String image = extras.getString("image");
+            if (name != null && image != null) {
+                addPerson(name, image);
+                extras.clear();
+            }
+        }
+    }
+    public boolean addPerson(String name, String image) {
         if (name != null && image != null) {
             int i = names.length +1;
             names[i] = name;
-            images[i] = image;
-            System.out.println(name.toString() + " with picture " + image.toString() + " has been added to the database.");
+            images[i] = getResources().getIdentifier(image, "drawable", getPackageName());
+            Log.i("ADDPERSON", "addPerson succeeded");
             return true;
+
         } else {
-            System.out.println("Name or image is not valid");
-            System.out.println("Name: " + name.toString());
-            System.out.println("Image: " + image.toString());
+            Log.d("ADDPERSON", "addPerson failed");
             return false;
         }
     }

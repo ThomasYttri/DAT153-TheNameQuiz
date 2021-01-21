@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">TheNameQuizApp</string>
     <string name="quiz">Quiz</string>
+    <string name="textview">TextView</string>
+    <string name="add_a_new_person">Add a new person</string>
+    <string name="add_person">Add Person</string>
+    <string name="name">Name</string>
+    <string name="image">Image</string>
 </resources>
