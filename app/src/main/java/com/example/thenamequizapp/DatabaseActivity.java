@@ -22,8 +22,8 @@ import java.util.HashMap;
 public class DatabaseActivity extends AppCompatActivity {
 
     private ListView listView;
-    private String names[] = {"Jon", "Morten", "Bendik"};
-    private Integer images[] = {R.drawable.jon, R.drawable.morten, R.drawable.bendik};
+    public String names[] = {"Jon", "Morten", "Bendik"};
+    public Integer images[] = {R.drawable.jon, R.drawable.morten, R.drawable.bendik};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +41,7 @@ public class DatabaseActivity extends AppCompatActivity {
     }
 
     // Checks for new person in extras and calls addPerson if present
-    public void checkForNewPerson(Bundle bundle) {
-        Bundle extras = getIntent().getExtras();
+    public void checkForNewPerson(Bundle extras) {
 
         if (extras == null) {
             return;
@@ -56,7 +55,7 @@ public class DatabaseActivity extends AppCompatActivity {
         }
     }
     public boolean addPerson(String name, String image) {
-        if (name != null && image != null) {
+        if (name != null && getResources().getIdentifier(image, "drawable", getPackageName()) != 0) {
             int i = names.length +1;
             names[i] = name;
             images[i] = getResources().getIdentifier(image, "drawable", getPackageName());
@@ -68,7 +67,6 @@ public class DatabaseActivity extends AppCompatActivity {
             return false;
         }
     }
-
 
     class MyAdapter extends ArrayAdapter<String> {
 
