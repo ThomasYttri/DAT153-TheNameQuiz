@@ -1,4 +1,4 @@
-package com.example.thenamequizapp;
+package com.example.thenamequizapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+
+import com.example.thenamequizapp.R;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         av.setAdapter(adapter);
         av.setOnItemClickListener((parent, view, position, id) -> {
             String key = (String) parent.getItemAtPosition(position);
-            startActivity((Intent) actions.get(key));
+            MainActivity.this.startActivity((Intent) actions.get(key));
         });
     }
 
