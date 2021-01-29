@@ -1,6 +1,8 @@
-package com.example.thenamequizapp;
+package com.example.thenamequizapp.Activities;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -17,54 +19,73 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.thenamequizapp.R;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+
+import Classes.Person;
 
 public class DatabaseActivity extends AppCompatActivity {
 
     private ListView listView;
-    public String names[] = {"Jon", "Morten", "Bendik"};
-    public Integer images[] = {R.drawable.jon, R.drawable.morten, R.drawable.bendik};
+    private List<Person> persons = new ArrayList<Person>();
+    Person jon = new Person("Jon", R.drawable.jon);
+    Person morten = new Person("Morten", R.drawable.morten);
+    Person bendik = new Person("Bendik", R.drawable.bendik);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
-        Bundle extras = getIntent().getExtras();
-        checkForNewPerson(extras);
+
+        persons.add(jon);
+        persons.add(morten);
+        persons.add(bendik);
+
+        checkExtras();
 
         listView = findViewById(R.id.dbList);
 
-        // Create adapter and fill with hardcoded data
+        String names[] = namesToList(persons);
+        Integer images[] = imagesToList(persons);
+
         MyAdapter myAdapter = new MyAdapter(this, names, images);
         listView.setAdapter(myAdapter);
 
     }
 
-    // Checks for new person in extras and calls addPerson if present
-    public void checkForNewPerson(Bundle extras) {
-
-        if (extras == null) {
-            return;
-        } else {
-            String name = extras.getString("name");
-            String image = extras.getString("image");
-            if (name != null && image != null) {
-                addPerson(name, image);
-                extras.clear();
-            }
-        }
+    public List<Person> getPersons() {
+        return persons;
     }
-    public boolean addPerson(String name, String image) {
-        if (name != null && getResources().getIdentifier(image, "drawable", getPackageName()) != 0) {
-            int i = names.length +1;
-            names[i] = name;
-            images[i] = getResources().getIdentifier(image, "drawable", getPackageName());
-            Log.i("ADDPERSON", "addPerson succeeded");
-            return true;
 
-        } else {
-            Log.d("ADDPERSON", "addPerson failed");
-            return false;
+    public String[] namesToList(List<Person> persons){
+        String names[] = new String[persons.size()];
+        int tall = 0;
+        for(Person person : persons) {
+            names[tall] = person.getName();
+            tall++;
+        }
+        return names;
+    }
+
+    public Integer[] imagesToList(List<Person> persons) {
+        Integer images[] = new Integer[persons.size()];
+        int i = 0;
+        for(Person person : persons) {
+            images[i] = person.getImage();
+            i++;
+        }
+        return images;
+    }
+
+    public void checkExtras() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            Person thomas = new Person(extras.getString("Name").toString(), R.drawable.thomas);
+            persons.add(thomas);
         }
     }
 
