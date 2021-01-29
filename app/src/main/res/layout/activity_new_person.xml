@@ -5,26 +5,17 @@
     android:layout_height="wrap_content"
     android:layout_margin="40dp"
     android:orientation="vertical"
-    tools:context=".NewPersonActivity">
+    tools:context=".Activities.NewPersonActivity">
 
 
     <EditText
-        android:id="@+id/editTextTextName"
+        android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="@string/name" />
-
-    <EditText
-        android:id="@+id/editTextImage"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/image" />
 
     <Button
         android:id="@+id/addPersonButton"
