@@ -8,11 +8,13 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TheNameQuizApp">
-        <activity android:name=".NewPersonActivity"></activity>
-        <activity android:name=".QuizActivity" />
-        <activity android:name=".DatabaseActivity" />
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.TheNameQuizApp"
+        >
+
+        <activity android:name=".Activities.NewPersonActivity"/>
+        <activity android:name=".Activities.QuizActivity" />
+        <activity android:name=".Activities.DatabaseActivity" />
+        <activity android:name=".Activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
