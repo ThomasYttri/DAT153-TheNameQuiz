@@ -1,5 +1,7 @@
 package Classes;
 
+import android.graphics.drawable.Drawable;
+
 public class Person {
 
     private String name;
@@ -18,7 +20,7 @@ public class Person {
         this.name = name;
     }
 
-    public Integer getImage() {
+    public Drawable getImage() {
         return image;
     }
 
