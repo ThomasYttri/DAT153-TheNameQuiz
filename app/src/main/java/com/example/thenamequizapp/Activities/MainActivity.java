@@ -8,19 +8,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.example.thenamequizapp.Classes.Database;
+import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     protected Map<String, Object> actions = new HashMap<>();
 
+    Database persons = new Database();
+
     void prepareMenu() {
         addMenuItem("Quiz", QuizActivity.class);
         addMenuItem("Database", DatabaseActivity.class);
         addMenuItem("Add new person", NewPersonActivity.class);
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,5 +48,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void addMenuItem(String label, Class<?> cls) {
         actions.put(label, new Intent(this, cls));
+    }
+
+    public Database getDatabase() {
+        return persons;
     }
 }
