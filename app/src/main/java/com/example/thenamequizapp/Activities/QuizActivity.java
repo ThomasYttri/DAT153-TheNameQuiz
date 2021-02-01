@@ -27,8 +27,8 @@ public class QuizActivity extends AppCompatActivity {
     TextView scoreValue;
     TextView answerLabel;
     private Person  person;
-    private Integer score;
-    private Integer maxScore;
+    private int score;
+    private int maxScore;
     private Iterator<Person> personIterator;
 
 
