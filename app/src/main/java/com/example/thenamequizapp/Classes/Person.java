@@ -1,13 +1,13 @@
-package Classes;
+package com.example.thenamequizapp.Classes;
 
 import android.graphics.drawable.Drawable;
 
 public class Person {
 
     private String name;
-    private Integer image;
+    private Drawable image;
 
-    public Person(String name, Integer image) {
+    public Person(String name, Drawable image) {
         this.name = name;
         this.image = image;
     }
@@ -24,7 +24,7 @@ public class Person {
         return image;
     }
 
-    public void setImage(Integer image) {
+    public void setImage(Drawable image) {
         this.image = image;
     }
 }
