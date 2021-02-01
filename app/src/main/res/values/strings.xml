@@ -6,4 +6,11 @@
     <string name="add_person">Add Person</string>
     <string name="name">Name</string>
     <string name="image">Image</string>
+    <string name="library">Library</string>
+    <string name="take_picture">Take Picture</string>
+    <string name="todo">TODO</string>
+    <string name="namelabel">Name</string>
+    <string name="delete">Delete</string>
+    <string name="person_picture">Person picture</string>
+    <string name="home">Home</string>
 </resources>
