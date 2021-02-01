@@ -19,8 +19,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     protected Map<String, Object> actions = new HashMap<>();
 
-    Database persons = new Database();
-
     void prepareMenu() {
         addMenuItem("Quiz", QuizActivity.class);
         addMenuItem("Database", DatabaseActivity.class);
@@ -32,6 +30,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ArrayList<Person> persons = ((Database) this.getApplication()).getDatabase();
+
+        if (persons.isEmpty()) {
+            ((Database) this.getApplication()).addPerson(new Person("Bendik", getDrawable(R.drawable.bendik)));
+            ((Database) this.getApplication()).addPerson(new Person("Jon", getDrawable(R.drawable.jon)));
+            ((Database) this.getApplication()).addPerson(new Person("Morten", getDrawable(R.drawable.morten)));
+        }
 
         prepareMenu();
         String[] keys = actions.keySet().toArray(new String[actions.keySet().size()]);
@@ -48,9 +54,5 @@ public class MainActivity extends AppCompatActivity {
 
     public void addMenuItem(String label, Class<?> cls) {
         actions.put(label, new Intent(this, cls));
-    }
-
-    public Database getDatabase() {
-        return persons;
     }
 }

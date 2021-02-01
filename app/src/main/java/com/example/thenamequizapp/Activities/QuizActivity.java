@@ -3,39 +3,51 @@ package com.example.thenamequizapp.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.example.thenamequizapp.Classes.Database;
+import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
 
-import java.util.List;
-
-import Classes.Person;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
 
 public class QuizActivity extends AppCompatActivity {
+
+    TextView question;
+    ImageView personImage;
+    EditText answerText;
+    Button button;
+    TextView scoreText;
+    private Person  person;
+    private Integer score;
+    private Integer maxScore;
+    private Iterator<Person> personIterator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        // Find view by id
+        question = findViewById(R.id.questionText);
+        personImage = findViewById(R.id.personImage);
+        answerText = findViewById(R.id.answerText);
+        button = findViewById(R.id.quizButton);
+        scoreText = findViewById(R.id.scoreText);
 
-        /*
+        // Score values
+        score = 0;
+        maxScore = 0;
 
-        Hent fram lista med personer
-
-        Velg tilfeldig person fra lista
-
-        Hent bilde fra person
-
-        onclick sjekk edittext om navn er lik navn i person objekt (hugs unngå case senitivitet)
-        Legg person til i ny liste over personer som har blitt valgt
-
-        Gi tilbakemelding Rett / feil
-        Legg til counter på antall rett
-
-        Hent fram nytt bilde, sjekk mot personer som allerede er valgt
-
-        repeat
-
-         */
+        // Shuffle database
+        ArrayList<Person> persons = ((Database) this.getApplication()).getDatabase();
+        Collections.shuffle(persons);
+        personIterator = persons.iterator();
     }
 }
