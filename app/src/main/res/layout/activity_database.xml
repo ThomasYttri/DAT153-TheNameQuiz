@@ -4,12 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Activities.DatabaseActivity">
+
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:forceDarkAllowed="false"
+        android:onClick="homeButton"
+        android:text="@string/home" />
 
     <ListView
         android:id="@+id/dbList"
         android:layout_width="match_parent"
+        android:layout_height="551dp">
+
+    </ListView>
+
+    <Button
+        android:id="@+id/addPersonDbView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        />
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:height="30dp"
+        android:onClick="addNewPerson"
+        android:text="@string/add_a_new_person" />
 
 </LinearLayout>

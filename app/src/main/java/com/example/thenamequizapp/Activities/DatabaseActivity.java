@@ -19,9 +19,6 @@ public class DatabaseActivity extends AppCompatActivity {
 
     private ListView listView;
 
-    private Database database = new Database();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +26,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
         listView = findViewById(R.id.dbList);
 
-        ArrayList<Person> persons = database.getDatabase();
+        ArrayList<Person> persons = ((Database) this.getApplication()).getDatabase();
 
         DatabaseAdapter databaseAdapter = new DatabaseAdapter(this, R.layout.row_item, persons);
 
@@ -39,6 +36,11 @@ public class DatabaseActivity extends AppCompatActivity {
 
     public void addNewPerson(View view) {
         Intent i = new Intent(this, NewPersonActivity.class);
+        startActivity(i);
+    }
+
+    public void homeButton(View view) {
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 }
