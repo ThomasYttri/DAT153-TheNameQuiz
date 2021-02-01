@@ -12,6 +12,7 @@ public class Database extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Adds 3 persons to the database
         database.add(new Person("Bendik", getDrawable(R.drawable.bendik)));
         database.add(new Person("Jon", getDrawable(R.drawable.jon)));
         database.add(new Person("Morten", getDrawable(R.drawable.morten)));

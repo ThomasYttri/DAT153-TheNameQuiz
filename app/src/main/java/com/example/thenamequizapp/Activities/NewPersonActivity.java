@@ -121,6 +121,7 @@ public class NewPersonActivity extends AppCompatActivity {
         }
     }
 
+    // Checks if you have permission to use Camera and access to gallery
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CAMERA_CODE) {
