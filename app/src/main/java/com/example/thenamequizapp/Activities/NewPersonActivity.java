@@ -1,7 +1,6 @@
 package com.example.thenamequizapp.Activities;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -10,20 +9,20 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thenamequizapp.Classes.Database;
 import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
 
-import java.io.IOException;
 
 public class NewPersonActivity extends AppCompatActivity {
 
@@ -36,10 +35,17 @@ public class NewPersonActivity extends AppCompatActivity {
     Button takePic;
     Button libraryPic;
 
+    EditText name;
+    ImageView image;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_person);
+
+        // Name and Image
+        name = findViewById(R.id.editTextName);
+        image = findViewById(R.id.imagePreview);
 
         //Getting buttons
         takePic = findViewById(R.id.takePicture);
@@ -49,11 +55,12 @@ public class NewPersonActivity extends AppCompatActivity {
         takePic.setOnClickListener(v -> checkAccessCamera());
         libraryPic.setOnClickListener(v -> checkAccessLibrary());
 
-
     }
 
     //Check permission to access camera, if good open camera
     public void checkAccessCamera() {
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_CODE);
         } else{
@@ -64,11 +71,13 @@ public class NewPersonActivity extends AppCompatActivity {
     // Open Camera
     public void openCamera() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(intent, 100);
+        startActivityForResult(intent, CAMERA_REQUEST_CODE);
     }
 
     //Check permission to open library, if good open library
     public void checkAccessLibrary() {
+        name.onEditorAction(EditorInfo.IME_ACTION_DONE);
+
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_GALLERY_CODE);
         } else {
@@ -85,8 +94,6 @@ public class NewPersonActivity extends AppCompatActivity {
 
     // Add person to database and go to database activity if name and image != null
     public void addPerson(View view) {
-        EditText name = findViewById(R.id.editTextName);
-        ImageView image = findViewById(R.id.imagePreview);
 
         if (!name.toString().equals("") && image.getDrawable() != null) {
             ((Database) this.getApplication()).addPerson(new Person(name.getText().toString(), image.getDrawable()));
@@ -95,23 +102,23 @@ public class NewPersonActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DatabaseActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Something went wrong while adding a new Person", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went wrong while adding a new person", Toast.LENGTH_SHORT).show();
         }
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == CAMERA_REQUEST_CODE) {
-            ImageView image = findViewById(R.id.imagePreview);
             Bitmap capturedImage = (Bitmap) data.getExtras().get("data");
             image.setImageBitmap(capturedImage);
 
         }
         if (requestCode == GALLERY_REQUEST_CODE){
-            ImageView image = findViewById(R.id.imagePreview);
             image.setImageURI(data.getData());
+        } else {
+            Toast.makeText(this, "Something went wrong when trying to get the image", Toast.LENGTH_SHORT).show();
         }
     }
 
