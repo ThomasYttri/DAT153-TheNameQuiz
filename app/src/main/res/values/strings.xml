@@ -16,5 +16,5 @@
     <string name="score">SCORE</string>
     <string name="submit_answer">Submit Answer</string>
     <string name="_0_0">0/0</string>
-    <string name="todo">TODO</string>
+    <string name="submit_answer_here">Submit answer here</string>
 </resources>
