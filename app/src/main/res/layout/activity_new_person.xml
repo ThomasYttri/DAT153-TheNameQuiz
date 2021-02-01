@@ -8,20 +8,56 @@
     tools:context=".Activities.NewPersonActivity">
 
 
+    <TextView
+        android:id="@+id/NameInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:labelFor="@id/editTextName"
+        android:text="@string/namelabel" />
+
     <EditText
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="30dp"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/name" />
+        android:importantForAutofill="no"
+        android:inputType="textPersonName" />
+
+    <ImageView
+        android:id="@+id/imagePreview"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/takePicture"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:text="@string/take_picture" />
+
+        <Button
+            android:id="@+id/library"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="154dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/library" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/addPersonButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="buttonClick"
+        android:onClick="addPerson"
         android:text="@string/add_person" />
 
 </LinearLayout>
