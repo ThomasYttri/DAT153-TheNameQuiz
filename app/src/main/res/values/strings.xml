@@ -17,4 +17,8 @@
     <string name="submit_answer">Submit Answer</string>
     <string name="_0_0">0/0</string>
     <string name="submit_answer_here">Submit answer here</string>
+    <string name="end_of_quiz">End of quiz!</string>
+    <string name="_10_10">10/10</string>
+    <string name="your_final_score_was">Your final score was:</string>
+    <string name="new_quiz">NEW QUIZ</string>
 </resources>

@@ -22,11 +22,11 @@ import java.util.Iterator;
 
 public class QuizActivity extends AppCompatActivity {
 
-    TextView question;
     ImageView personImage;
     EditText answerText;
     Button button;
     TextView scoreValue;
+    TextView answerLabel;
     private Person  person;
     private Integer score;
     private Integer maxScore;
@@ -39,11 +39,11 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(R.layout.activity_quiz);
 
         // Find view by id
-        question = findViewById(R.id.questionText);
         personImage = findViewById(R.id.personImage);
         answerText = findViewById(R.id.answerText);
         button = findViewById(R.id.quizButton);
         scoreValue = findViewById(R.id.scoreValue);
+        answerLabel = findViewById(R.id.answerLabel);
 
         // Score values
         score = 0;
@@ -66,14 +66,16 @@ public class QuizActivity extends AppCompatActivity {
             person = personIterator.next();
             personImage.setImageDrawable(person.getImage());
         } else {
-            question.setText("Quiz finished, your results:");
-            personImage.setImageDrawable(null);
-            answerText.setHint("");
-            answerText.setBackgroundResource(android.R.color.transparent);
-            answerText.clearFocus();
-            button.setText("End quiz");
-            button.setOnClickListener(v -> endQuiz());
+            setContentView(R.layout.quiz_finished);
 
+            TextView endScoreValue = findViewById(R.id.endScoreValue);
+            Button homeButton = findViewById(R.id.endQuizHomeButton);
+            Button newQuizButton = findViewById(R.id.endQuizNewQuiz);
+
+            endScoreValue.setText(score + " / " + maxScore);
+
+            homeButton.setOnClickListener(v -> endQuiz());
+            newQuizButton.setOnClickListener(v -> newQuiz());
         }
         answerText.setText("");
         answerText.onEditorAction(EditorInfo.IME_ACTION_DONE);
@@ -105,7 +107,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     // onClick for newQuizButton
-    public void newQuiz(View view){
+    public void newQuiz(){
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
     }
