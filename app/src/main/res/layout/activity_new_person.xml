@@ -27,7 +27,8 @@
     <ImageView
         android:id="@+id/imagePreview"
         android:layout_width="match_parent"
-        android:layout_height="150dp" />
+        android:layout_height="150dp"
+        android:contentDescription="@string/imageview" />
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
