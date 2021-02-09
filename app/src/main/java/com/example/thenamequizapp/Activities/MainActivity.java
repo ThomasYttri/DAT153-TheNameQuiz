@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -19,11 +20,7 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     protected Map<String, Object> actions = new HashMap<>();
 
-    void prepareMenu() {
-        addMenuItem("Quiz", QuizActivity.class);
-        addMenuItem("Database", DatabaseActivity.class);
-        addMenuItem("Add new person", NewPersonActivity.class);
-    }
+
 
 
     @Override
@@ -31,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        /*
         ArrayList<Person> persons = ((Database) this.getApplication()).getDatabase();
 
         if (persons.isEmpty()) {
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
             ((Database) this.getApplication()).addPerson(new Person("Jon", getDrawable(R.drawable.jon)));
             ((Database) this.getApplication()).addPerson(new Person("Morten", getDrawable(R.drawable.morten)));
         }
+
 
         prepareMenu();
         String[] keys = actions.keySet().toArray(new String[actions.keySet().size()]);
@@ -50,9 +50,35 @@ public class MainActivity extends AppCompatActivity {
             String key = (String) parent.getItemAtPosition(position);
             MainActivity.this.startActivity((Intent) actions.get(key));
         });
+
+         */
     }
 
+    public void quiz(View view) {
+        Intent i = new Intent(this, QuizActivity.class);
+        startActivity(i);
+    }
+
+    public void database(View view) {
+        Intent i = new Intent(this, DatabaseActivity.class);
+        startActivity(i);
+    }
+
+    public void newPerson(View view) {
+        Intent i = new Intent(this, QuizActivity.class);
+        startActivity(i);
+    }
+
+    /*
     public void addMenuItem(String label, Class<?> cls) {
         actions.put(label, new Intent(this, cls));
     }
+    void prepareMenu() {
+        addMenuItem("Quiz", QuizActivity.class);
+        addMenuItem("Database", DatabaseActivity.class);
+        addMenuItem("Add new person", NewPersonActivity.class);
+    }
+
+     */
+
 }

@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".Activities.MainActivity">
 
-    <ListView
-        android:id="@+id/menu_list"
+
+    <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </ListView>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:gravity="center_horizontal"
+        android:text="Welcome to the name quiz app"
+        android:textSize="36sp" />
+
+    <Button
+        android:id="@+id/mainQuiz"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:onClick="quiz"
+        android:text="@string/quiz" />
+
+    <Button
+        android:id="@+id/mainDatabase"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:onClick="database"
+        android:text="@string/database" />
+
+    <Button
+        android:id="@+id/mainAdd"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:onClick="newPerson"
+        android:text="@string/add_a_new_person" />
 
 </LinearLayout>
