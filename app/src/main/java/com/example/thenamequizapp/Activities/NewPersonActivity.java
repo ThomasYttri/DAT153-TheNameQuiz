@@ -116,8 +116,6 @@ public class NewPersonActivity extends AppCompatActivity {
         }
         if (requestCode == GALLERY_REQUEST_CODE){
             image.setImageURI(data.getData());
-        } else {
-            Toast.makeText(this, "Something went wrong when trying to get the image", Toast.LENGTH_SHORT).show();
         }
     }
 
