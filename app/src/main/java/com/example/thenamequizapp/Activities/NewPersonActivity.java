@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.thenamequizapp.Classes.AppDatabase;
 import com.example.thenamequizapp.Classes.Database;
 import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
@@ -37,10 +38,15 @@ public class NewPersonActivity extends AppCompatActivity {
     EditText name;
     ImageView image;
 
+    private AppDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_person);
+
+        // Database
+        database = AppDatabase.getInstance(this);
 
         // Name and Image
         name = findViewById(R.id.editTextName);
@@ -95,7 +101,7 @@ public class NewPersonActivity extends AppCompatActivity {
     public void addPerson(View view) {
 
         if (!name.toString().equals("") && image.getDrawable() != null) {
-            ((Database) this.getApplication()).addPerson(new Person(name.getText().toString(), image.getDrawable()));
+            database.personDao().addPerson(new Person(name.getText().toString(), image.getDrawable()));
             Toast.makeText(this, "Person added", Toast.LENGTH_SHORT).show();
 
             Intent intent = new Intent(this, DatabaseActivity.class);

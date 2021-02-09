@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.thenamequizapp.Classes.AppDatabase;
 import com.example.thenamequizapp.Classes.Database;
 import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
@@ -18,6 +19,7 @@ import com.example.thenamequizapp.R;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -52,7 +54,8 @@ public class QuizActivity extends AppCompatActivity {
         button.setOnClickListener(v -> checkAnswer());
 
         // Shuffle database
-        ArrayList<Person> persons = ((Database) this.getApplication()).getDatabase();
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
+        List<Person> persons = appDatabase.personDao().getAll();
         Collections.shuffle(persons);
         personIterator = persons.iterator();
 
