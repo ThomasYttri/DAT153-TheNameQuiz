@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.example.thenamequizapp.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import com.example.thenamequizapp.Classes.Person;
 
@@ -23,7 +23,7 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
     private Context context;
     private int resources;
 
-    public DatabaseAdapter (@NonNull Context context, int resources, @NonNull ArrayList<Person> persons) {
+    public DatabaseAdapter (@NonNull Context context, int resources, @NonNull List<Person> persons) {
         super(context, resources, persons);
         this.context = context;
         this.resources = resources;

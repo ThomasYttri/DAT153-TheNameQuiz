@@ -12,11 +12,7 @@ public class Person {
 
     @PrimaryKey(autoGenerate = true)
     public int uid;
-
-    @ColumnInfo(name="name")
     private String name;
-
-    @Ignore
     private Drawable image;
 
     public Person(String name, Drawable image) {
