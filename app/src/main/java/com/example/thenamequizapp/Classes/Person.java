@@ -2,9 +2,21 @@ package com.example.thenamequizapp.Classes;
 
 import android.graphics.drawable.Drawable;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Person {
 
+    @PrimaryKey(autoGenerate = true)
+    public int uid;
+
+    @ColumnInfo(name="name")
     private String name;
+
+    @Ignore
     private Drawable image;
 
     public Person(String name, Drawable image) {
@@ -24,7 +36,4 @@ public class Person {
         return image;
     }
 
-    public void setImage(Drawable image) {
-        this.image = image;
-    }
 }

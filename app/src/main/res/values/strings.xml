@@ -22,4 +22,5 @@
     <string name="your_final_score_was">Your final score was:</string>
     <string name="new_quiz">NEW QUIZ</string>
     <string name="imageview">imageView</string>
+    <string name="database">Database</string>
 </resources>
