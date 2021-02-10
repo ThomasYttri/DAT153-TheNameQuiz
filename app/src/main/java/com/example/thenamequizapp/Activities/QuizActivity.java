@@ -12,11 +12,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.thenamequizapp.Classes.AppDatabase;
-import com.example.thenamequizapp.Classes.Database;
 import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;

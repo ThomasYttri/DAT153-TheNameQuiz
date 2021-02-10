@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.thenamequizapp.Classes.AppDatabase;
-import com.example.thenamequizapp.Classes.Database;
 import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.R;
 

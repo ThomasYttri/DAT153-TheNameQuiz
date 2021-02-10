@@ -11,10 +11,8 @@ import com.example.thenamequizapp.Adapters.DatabaseAdapter;
 import com.example.thenamequizapp.Classes.AppDatabase;
 import com.example.thenamequizapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.example.thenamequizapp.Classes.Database;
 import com.example.thenamequizapp.Classes.Person;
 
 public class DatabaseActivity extends AppCompatActivity {
