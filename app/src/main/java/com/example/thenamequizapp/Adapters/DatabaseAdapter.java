@@ -8,12 +8,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.example.thenamequizapp.Classes.AppDatabase;
 import com.example.thenamequizapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.example.thenamequizapp.Classes.Person;
@@ -22,11 +25,15 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
 
     private Context context;
     private int resources;
+    private AppDatabase appDatabase;
+    private List<Person> persons;
 
     public DatabaseAdapter (@NonNull Context context, int resources, @NonNull List<Person> persons) {
         super(context, resources, persons);
         this.context = context;
         this.resources = resources;
+        this.persons = persons;
+        this.appDatabase = AppDatabase.getInstance(context);
     }
 
     @NonNull
@@ -34,7 +41,7 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
     public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         LayoutInflater layoutInflater = LayoutInflater.from(context);
 
-        view = layoutInflater.inflate(this.resources, parent, false);
+        view = layoutInflater.inflate(resources, parent, false);
 
         //Image
         ImageView imageView = view.findViewById(R.id.imageViewPerson);
@@ -46,8 +53,15 @@ public class DatabaseAdapter extends ArrayAdapter<Person> {
 
         //Delete button
         Button deleteButton = view.findViewById(R.id.deleteButton);
-        deleteButton.setOnClickListener(v -> remove(getItem(position)));
+        deleteButton.setOnClickListener(v -> deletePerson(position));
 
         return view;
+    }
+
+    public void deletePerson(int pos){
+        Person person = getItem(pos);
+        remove(person);
+        appDatabase.personDao().deletePerson(person);
+        Toast.makeText(context, "Successfully removed " + person.getName(), Toast.LENGTH_SHORT).show();
     }
 }

@@ -9,7 +9,7 @@ import androidx.room.TypeConverters;
 
 import com.example.thenamequizapp.DAO.PersonDao;
 
-@Database(entities = {Person.class}, version = 1)
+@Database(entities = {Person.class}, version = 6)
 @TypeConverters({Converter.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract PersonDao personDao();
@@ -21,5 +21,9 @@ public abstract class AppDatabase extends RoomDatabase {
                     fallbackToDestructiveMigration().allowMainThreadQueries().build();
         }
         return instance;
+    }
+
+    public PersonDao getPersonDao(){
+        return personDao();
     }
 }
