@@ -30,6 +30,7 @@ public class QuizActivity extends AppCompatActivity {
     private int score;
     private int maxScore;
     private Iterator<Person> personIterator;
+    public static List<Person> persons;
 
 
     @Override
@@ -53,7 +54,7 @@ public class QuizActivity extends AppCompatActivity {
 
         // Shuffle database
         AppDatabase appDatabase = AppDatabase.getInstance(this);
-        List<Person> persons = appDatabase.personDao().getAll();
+        persons = appDatabase.personDao().getAll();
         Collections.shuffle(persons);
         personIterator = persons.iterator();
 
