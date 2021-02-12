@@ -27,7 +27,7 @@ public class QuizActivity extends AppCompatActivity {
     TextView scoreValue;
     TextView answerLabel;
     private Person  person;
-    private int score;
+    public static int score;
     private int maxScore;
     private Iterator<Person> personIterator;
     public static List<Person> persons;
