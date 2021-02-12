@@ -28,20 +28,14 @@ public class ActivityButtonTest {
 
 
     @Test
-    public void launchActivityTest(){
-        /*
-        activityRule.getScenario();
-
-        // Init Intents
+    public void launchActivityTest() {
+        // Initiate intents
         Intents.init();
 
-        // Perform onclick
+        // Perform onclick -> DatabaseActivity
         onView(withId(R.id.mainDatabase)).perform(ViewActions.click());
 
-        // Compare Activity
+        // Compare the Activity
         intended(hasComponent(DatabaseActivity.class.getName()));
-
-         */
     }
-
 }
