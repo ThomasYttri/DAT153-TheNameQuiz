@@ -1,7 +1,9 @@
 package com.example.thenamequizapp;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 import android.view.View;
 
@@ -32,11 +34,12 @@ import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
-public class DatabaseEntryTest {
+public class DatabaseTest {
 
     private AppDatabase appDatabase;
     private PersonDao personDao;
     private Context context;
+    private Person jon;
 
     @Rule
     public ActivityScenarioRule<DatabaseActivity> activityRule =
@@ -47,22 +50,32 @@ public class DatabaseEntryTest {
         context = ApplicationProvider.getApplicationContext();
         appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         personDao = appDatabase.getPersonDao();
-    }
 
-    @Test
-    public void entryTest(){
-        /*
-        Person jon = new Person("Jon", ContextCompat.getDrawable(context, R.drawable.jon));
+        // Create mister Jon
+        jon = new Person("Jon", ContextCompat.getDrawable(context, R.drawable.jon));
+
+        // Add Jon to the database
         personDao.addPerson(jon);
-        List<Person> persons = personDao.getAll();
-        assertThat(persons.get(persons.size() - 1), equalTo(jon));
-
-         */
     }
 
     @After
     public void afterEntryTest(){
         appDatabase.close();
+    }
+
+    @Test
+    public void entryTest() {
+        // Assert that mister Jon was added to the database
+        assertThat(personDao.getAll().size(), equalTo(1));
+    }
+
+    @Test
+    public void removalTest() {
+        // Delete Jon from the database
+        personDao.deletePerson(jon);
+
+        // Assert that Jon was removed from the database
+        assertThat(personDao.getAll().size(), equalTo(1));
     }
 
 }
