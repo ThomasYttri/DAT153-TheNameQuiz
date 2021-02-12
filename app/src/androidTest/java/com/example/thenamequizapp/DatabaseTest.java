@@ -1,11 +1,6 @@
 package com.example.thenamequizapp;
 
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
-import android.view.View;
 
 import androidx.core.content.ContextCompat;
 import androidx.room.Room;
@@ -28,9 +23,6 @@ import org.junit.runner.RunWith;
 
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.*;
-import static org.junit.matchers.JUnitMatchers.*;
-
-import java.util.List;
 
 @RunWith(AndroidJUnit4.class)
 @LargeTest
