@@ -38,7 +38,6 @@ public class ScoreTest {
             onView(withId(R.id.answerText)).perform(typeText(name), ViewActions.closeSoftKeyboard());
             onView(withId(R.id.quizButton)).perform(click());
             assertThat(QuizActivity.score, equalTo(1));
-            //onView(withId(R.id.scoreValue)).check(matches(withSubstring("1 / 1")));
         }
     }
 
@@ -51,7 +50,4 @@ public class ScoreTest {
             assertThat(QuizActivity.score, equalTo(0));
         }
     }
-
-
-
 }
