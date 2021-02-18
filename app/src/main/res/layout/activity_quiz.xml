@@ -8,6 +8,14 @@
     android:orientation="vertical"
     tools:context=".Activities.QuizActivity">
 
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:forceDarkAllowed="false"
+        android:text="@string/home" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

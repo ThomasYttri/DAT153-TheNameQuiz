@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,7 @@ public class QuizActivity extends AppCompatActivity {
     ImageView personImage;
     EditText answerText;
     Button button;
+    Button homeButton;
     TextView scoreValue;
     TextView answerLabel;
     private Person  person;
@@ -31,7 +34,6 @@ public class QuizActivity extends AppCompatActivity {
     private int maxScore;
     private Iterator<Person> personIterator;
     public static List<Person> persons;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,7 @@ public class QuizActivity extends AppCompatActivity {
         button = findViewById(R.id.quizButton);
         scoreValue = findViewById(R.id.scoreValue);
         answerLabel = findViewById(R.id.answerLabel);
+        homeButton = findViewById(R.id.homeButton);
 
         // Score values
         score = 0;
@@ -51,6 +54,7 @@ public class QuizActivity extends AppCompatActivity {
 
         // Bind button
         button.setOnClickListener(v -> checkAnswer());
+        homeButton.setOnClickListener(v -> homeButtonQuiz());
 
         // Shuffle database
         AppDatabase appDatabase = AppDatabase.getInstance(this);
@@ -66,7 +70,7 @@ public class QuizActivity extends AppCompatActivity {
         if (personIterator.hasNext()) {
             person = personIterator.next();
             personImage.setImageDrawable(person.getImage());
-        } else {
+        } else if (!personIterator.hasNext() && maxScore != 0){
             setContentView(R.layout.quiz_finished);
 
             TextView endScoreValue = findViewById(R.id.endScoreValue);
@@ -75,7 +79,7 @@ public class QuizActivity extends AppCompatActivity {
 
             endScoreValue.setText(score + " / " + maxScore);
 
-            homeButton.setOnClickListener(v -> endQuiz());
+            homeButton.setOnClickListener(v -> homeButtonQuiz());
             newQuizButton.setOnClickListener(v -> newQuiz());
         }
         answerText.setText("");
@@ -101,15 +105,21 @@ public class QuizActivity extends AppCompatActivity {
         newPerson();
     }
 
-    // Onclick for end quiz button
-    public void endQuiz(){
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
     // onClick for newQuizButton
     public void newQuiz(){
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
     }
+
+    // Homebutton handler
+    public void homeButtonQuiz() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    @Override
+    public void onBackPressed(){
+        homeButtonQuiz();
+    }
+
 }

@@ -11,6 +11,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
@@ -33,6 +34,7 @@ public class NewPersonActivity extends AppCompatActivity {
     //BUTTONS
     Button takePic;
     Button libraryPic;
+    Button homeButton;
 
     EditText name;
     ImageView image;
@@ -54,10 +56,12 @@ public class NewPersonActivity extends AppCompatActivity {
         //Getting buttons
         takePic = findViewById(R.id.takePicture);
         libraryPic = findViewById(R.id.library);
+        homeButton = findViewById(R.id.homeButton);
 
         //Bind function to buttons
         takePic.setOnClickListener(v -> checkAccessCamera());
         libraryPic.setOnClickListener(v -> checkAccessLibrary());
+        homeButton.setOnClickListener(v -> homeButtonAddPerson());
 
     }
 
@@ -106,7 +110,7 @@ public class NewPersonActivity extends AppCompatActivity {
             Intent intent = new Intent(this, DatabaseActivity.class);
             startActivity(intent);
         } else {
-            Toast.makeText(this, "Something went wrong while adding a new person", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -142,5 +146,15 @@ public class NewPersonActivity extends AppCompatActivity {
                 Toast.makeText(this, "Access to library is required for the application to use it.", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        homeButtonAddPerson();
+    }
+
+    public void homeButtonAddPerson() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
 }

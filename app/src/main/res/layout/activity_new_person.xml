@@ -7,6 +7,14 @@
     android:orientation="vertical"
     tools:context=".Activities.NewPersonActivity">
 
+    <Button
+        android:id="@+id/homeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:forceDarkAllowed="false"
+        android:onClick="homeButtonAddPerson"
+        android:text="@string/home" />
 
     <TextView
         android:id="@+id/NameInput"

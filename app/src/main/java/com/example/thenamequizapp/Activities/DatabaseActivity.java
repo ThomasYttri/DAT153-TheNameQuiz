@@ -2,7 +2,9 @@ package com.example.thenamequizapp.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,7 @@ public class DatabaseActivity extends AppCompatActivity {
 
     private AppDatabase appDatabase;
     private ListView listView;
+    Button homeButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class DatabaseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_database);
 
         listView = findViewById(R.id.dbList);
+        homeButton = findViewById(R.id.homeButton);
+
+        homeButton.setOnClickListener(v -> homeButtonDatabase());
 
         appDatabase = AppDatabase.getInstance(this);
         List<Person> persons = appDatabase.personDao().getAll();
@@ -41,8 +47,14 @@ public class DatabaseActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void homeButton(View view) {
+    public void homeButtonDatabase() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
+    @Override
+    public void onBackPressed(){
+        homeButtonDatabase();
+    }
+
 }
