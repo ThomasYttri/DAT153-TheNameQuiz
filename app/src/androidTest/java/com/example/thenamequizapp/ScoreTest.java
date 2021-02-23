@@ -16,6 +16,7 @@ import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.DAO.PersonDao;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -35,22 +36,24 @@ import static org.junit.Assert.*;
 @LargeTest
 public class ScoreTest {
 
-    private List<Person> persons;
-    private PersonDao personDao;
+    private QuizActivity q;
 
     @Rule
     public ActivityScenarioRule<QuizActivity> activityRule =
             new ActivityScenarioRule<>(QuizActivity.class);
 
-    /*
+
     // This method will not work because QuizActivity is started before the @Before function in the test
     // class is run. Therefor it will not update the layout, and the first of the two tests will fail.
     // Two different solutions:
     // Always pass test if database is empty.
     // Start test in MainActivity, add person to database, and the load the Quiz Activity.
 
-    @Before
-    public void beforeScoreTest(){
+    @BeforeClass
+    public static void beforeScoreTest(){
+        List<Person> persons;
+        PersonDao personDao;
+
         Context context = ApplicationProvider.getApplicationContext();
         AppDatabase appDatabase = AppDatabase.getInstance(context);
         personDao = appDatabase.getPersonDao();
@@ -60,33 +63,29 @@ public class ScoreTest {
             personDao.addPerson(new Person("Morten", ContextCompat.getDrawable(context, R.drawable.morten)));
         }
     }
-     */
 
     @Test
     public void scoreCorrectAnswer(){
-        if (!QuizActivity.persons.isEmpty()) {
-            String name = QuizActivity.persons.get(0).getName();
 
-            assertThat(QuizActivity.score, equalTo(0));
-            onView(withId(R.id.answerText)).perform(typeText(name), ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.quizButton)).perform(click());
-            assertThat(QuizActivity.score, equalTo(1));
-        } else {
-            Log.e("test", "Can't test score without entries in database");
-        }
+        activityRule.getScenario().onActivity(x -> {q = x;});
+        assertTrue(!q.persons.isEmpty());
+        String name = q.persons.get(0).getName();
+
+
+        assertThat(q.score, equalTo(0));
+        onView(withId(R.id.answerText)).perform(typeText(name), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.quizButton)).perform(click());
+        assertThat(q.score, equalTo(1));
     }
 
     @Test
     public void scoreIncorrectAnswer(){
-        if (!QuizActivity.persons.isEmpty()) {
-            assertThat(QuizActivity.score, equalTo(0));
-            onView(withId(R.id.answerText)).perform(typeText("Wrong"), ViewActions.closeSoftKeyboard());
-            onView(withId(R.id.quizButton)).perform(click());
-            assertThat(QuizActivity.score, equalTo(0));
-        } else {
-            Log.e("test", "Can't test score without entries in database");
-        }
-
+        activityRule.getScenario().onActivity(x -> {q = x;});
+        assertTrue(!q.persons.isEmpty());
+        assertThat(q.score, equalTo(0));
+        onView(withId(R.id.answerText)).perform(typeText("Wrong"), ViewActions.closeSoftKeyboard());
+        onView(withId(R.id.quizButton)).perform(click());
+        assertThat(q.score, equalTo(0));
     }
 
 }

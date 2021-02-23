@@ -30,10 +30,10 @@ public class QuizActivity extends AppCompatActivity {
     TextView scoreValue;
     TextView answerLabel;
     private Person  person;
-    public static int score;
+    public int score;
     private int maxScore;
     private Iterator<Person> personIterator;
-    public static List<Person> persons;
+    public List<Person> persons;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

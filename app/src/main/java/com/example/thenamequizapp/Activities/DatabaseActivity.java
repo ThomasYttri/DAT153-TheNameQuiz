@@ -48,13 +48,7 @@ public class DatabaseActivity extends AppCompatActivity {
     }
 
     public void homeButtonDatabase() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-
-    @Override
-    public void onBackPressed(){
-        homeButtonDatabase();
+        finish();
     }
 
 }

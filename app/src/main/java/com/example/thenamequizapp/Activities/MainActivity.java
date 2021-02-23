@@ -45,9 +45,4 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, NewPersonActivity.class);
         startActivity(i);
     }
-
-    @Override
-    public void onBackPressed(){
-        Log.d("Info", "Back button is disabled");
-    }
 }

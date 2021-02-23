@@ -109,6 +109,7 @@ public class NewPersonActivity extends AppCompatActivity {
 
             Intent intent = new Intent(this, DatabaseActivity.class);
             startActivity(intent);
+            finish();
         } else {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show();
         }
@@ -148,13 +149,7 @@ public class NewPersonActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed(){
-        homeButtonAddPerson();
-    }
-
     public void homeButtonAddPerson() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        finish();
     }
 }
