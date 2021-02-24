@@ -36,18 +36,11 @@ import static org.junit.Assert.*;
 @LargeTest
 public class ScoreTest {
 
-    private QuizActivity q;
+    private QuizActivity quizActivity;
 
     @Rule
     public ActivityScenarioRule<QuizActivity> activityRule =
             new ActivityScenarioRule<>(QuizActivity.class);
-
-
-    // This method will not work because QuizActivity is started before the @Before function in the test
-    // class is run. Therefor it will not update the layout, and the first of the two tests will fail.
-    // Two different solutions:
-    // Always pass test if database is empty.
-    // Start test in MainActivity, add person to database, and the load the Quiz Activity.
 
     @BeforeClass
     public static void beforeScoreTest(){
@@ -67,25 +60,24 @@ public class ScoreTest {
     @Test
     public void scoreCorrectAnswer(){
 
-        activityRule.getScenario().onActivity(x -> {q = x;});
-        assertTrue(!q.persons.isEmpty());
-        String name = q.persons.get(0).getName();
+        activityRule.getScenario().onActivity(x -> {quizActivity = x;});
+        assertTrue(!quizActivity.persons.isEmpty());
+        String name = quizActivity.persons.get(0).getName();
 
-
-        assertThat(q.score, equalTo(0));
+        assertThat(quizActivity.score, equalTo(0));
         onView(withId(R.id.answerText)).perform(typeText(name), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.quizButton)).perform(click());
-        assertThat(q.score, equalTo(1));
+        assertThat(quizActivity.score, equalTo(1));
     }
 
     @Test
     public void scoreIncorrectAnswer(){
-        activityRule.getScenario().onActivity(x -> {q = x;});
-        assertTrue(!q.persons.isEmpty());
-        assertThat(q.score, equalTo(0));
+        activityRule.getScenario().onActivity(x -> {quizActivity = x;});
+        assertTrue(!quizActivity.persons.isEmpty());
+        assertThat(quizActivity.score, equalTo(0));
         onView(withId(R.id.answerText)).perform(typeText("Wrong"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.quizButton)).perform(click());
-        assertThat(q.score, equalTo(0));
+        assertThat(quizActivity.score, equalTo(0));
     }
 
 }
