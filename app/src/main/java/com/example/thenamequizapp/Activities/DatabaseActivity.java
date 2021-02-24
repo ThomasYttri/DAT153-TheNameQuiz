@@ -42,6 +42,7 @@ public class DatabaseActivity extends AppCompatActivity {
     public void addNewPerson(View view) {
         Intent i = new Intent(this, NewPersonActivity.class);
         startActivity(i);
+        finish();
     }
 
     public void homeButtonDatabase() {
