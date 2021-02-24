@@ -61,7 +61,7 @@ public class ScoreTest {
     public void scoreCorrectAnswer(){
 
         activityRule.getScenario().onActivity(x -> {quizActivity = x;});
-        assertTrue(!quizActivity.persons.isEmpty());
+        assertFalse(quizActivity.persons.isEmpty());
         String name = quizActivity.persons.get(0).getName();
 
         assertThat(quizActivity.score, equalTo(0));
@@ -73,7 +73,7 @@ public class ScoreTest {
     @Test
     public void scoreIncorrectAnswer(){
         activityRule.getScenario().onActivity(x -> {quizActivity = x;});
-        assertTrue(!quizActivity.persons.isEmpty());
+        assertFalse(quizActivity.persons.isEmpty());
         assertThat(quizActivity.score, equalTo(0));
         onView(withId(R.id.answerText)).perform(typeText("Wrong"), ViewActions.closeSoftKeyboard());
         onView(withId(R.id.quizButton)).perform(click());
