@@ -24,7 +24,7 @@ public class ActivityButtonTest {
 
     @Rule
     public ActivityScenarioRule<MainActivity> activityRule =
-            new ActivityScenarioRule<MainActivity>(MainActivity.class);
+            new ActivityScenarioRule<>(MainActivity.class);
 
 
     @Test

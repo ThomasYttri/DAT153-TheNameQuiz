@@ -30,16 +30,15 @@ public class DatabaseTest {
 
     private AppDatabase appDatabase;
     private PersonDao personDao;
-    private Context context;
     private Person jon;
 
     @Rule
     public ActivityScenarioRule<DatabaseActivity> activityRule =
-            new ActivityScenarioRule<DatabaseActivity>(DatabaseActivity.class);
+            new ActivityScenarioRule<>(DatabaseActivity.class);
 
     @Before
     public void beforeEntryTest(){
-        context = ApplicationProvider.getApplicationContext();
+        Context context = ApplicationProvider.getApplicationContext();
         appDatabase = Room.inMemoryDatabaseBuilder(context, AppDatabase.class).build();
         personDao = appDatabase.getPersonDao();
 

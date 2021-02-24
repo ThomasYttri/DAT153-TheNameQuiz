@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -14,7 +13,6 @@ import com.example.thenamequizapp.R;
 
 
 public class MainActivity extends AppCompatActivity {
-    private AppDatabase appDatabase;
     private PersonDao personDao;
 
     @Override
@@ -22,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        appDatabase = AppDatabase.getInstance(this);
+        AppDatabase appDatabase = AppDatabase.getInstance(this);
         personDao = appDatabase.getPersonDao();
     }
 

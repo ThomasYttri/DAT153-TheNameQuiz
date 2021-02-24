@@ -14,9 +14,6 @@ public interface PersonDao {
     @Query("SELECT * FROM person")
     List<Person> getAll();
 
-    @Query("SELECT * FROM person WHERE uid IN (:personIds)")
-    List<Person> loadAllByIds(int[] personIds);
-
     @Insert
     void addPerson(Person person);
 

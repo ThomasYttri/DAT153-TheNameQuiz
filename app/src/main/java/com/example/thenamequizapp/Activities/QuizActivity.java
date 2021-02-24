@@ -4,8 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -113,13 +111,7 @@ public class QuizActivity extends AppCompatActivity {
 
     // Homebutton handler
     public void homeButtonQuiz() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-
-    @Override
-    public void onBackPressed(){
-        homeButtonQuiz();
+        finish();
     }
 
 }

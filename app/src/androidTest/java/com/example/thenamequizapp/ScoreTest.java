@@ -1,7 +1,6 @@
 package com.example.thenamequizapp;
 
 import android.content.Context;
-import android.util.Log;
 
 import androidx.core.content.ContextCompat;
 import androidx.test.core.app.ApplicationProvider;
@@ -15,7 +14,6 @@ import com.example.thenamequizapp.Classes.AppDatabase;
 import com.example.thenamequizapp.Classes.Person;
 import com.example.thenamequizapp.DAO.PersonDao;
 
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -60,7 +58,7 @@ public class ScoreTest {
     @Test
     public void scoreCorrectAnswer(){
 
-        activityRule.getScenario().onActivity(x -> {quizActivity = x;});
+        activityRule.getScenario().onActivity(x -> quizActivity = x);
         assertFalse(quizActivity.persons.isEmpty());
         String name = quizActivity.persons.get(0).getName();
 
@@ -72,7 +70,7 @@ public class ScoreTest {
 
     @Test
     public void scoreIncorrectAnswer(){
-        activityRule.getScenario().onActivity(x -> {quizActivity = x;});
+        activityRule.getScenario().onActivity(x -> quizActivity = x);
         assertFalse(quizActivity.persons.isEmpty());
         assertThat(quizActivity.score, equalTo(0));
         onView(withId(R.id.answerText)).perform(typeText("Wrong"), ViewActions.closeSoftKeyboard());
