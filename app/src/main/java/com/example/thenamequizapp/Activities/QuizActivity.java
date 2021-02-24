@@ -107,6 +107,7 @@ public class QuizActivity extends AppCompatActivity {
     public void newQuiz(){
         Intent intent = new Intent(this, QuizActivity.class);
         startActivity(intent);
+        finish();
     }
 
     // Homebutton handler
